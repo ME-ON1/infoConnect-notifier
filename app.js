@@ -30,10 +30,10 @@ const documentInitili = (driver) => {
 	await driver.wait(until.elementsLocated(By.name('login')),2000)
 	await driver.findElement(By.name("login")).sendKeys(process.env.USER_ID, Key.TAB) ;
         await driver.findElement(By.name("password")).sendKeys(process.env.PASSWORD, Key.ENTER) 
-	const lastDataObj = (last_Notice_Id) ;
-	const recentDataObj = await driver.findElements(By.xpath("/ul[@class='row']/li[@id='23619']"))
-	console.log("tag", recentDataObj) ;
-			
+		//    //*[@id="notice_title_23619"]
+        await driver.wait(until.elementsLocated(By.xpath(`//*[@id='notice_title_${last_Notice_Id.last_Notice_Id}']`)),4000)                 
+	const recentDataObj = await driver.findElement(By.xpath("//*[@id='notice_title_23619']"))	
+		console.log(recentDataObj) ;
 	}catch(err) {
 		console.log(err)
 		await driver.quit() ;
