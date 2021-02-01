@@ -32,12 +32,50 @@ const documentInitili = (driver) => {
         await driver.findElement(By.name("password")).sendKeys(process.env.PASSWORD, Key.ENTER) 
 		//    //*[@id="notice_title_23619"]
         await driver.wait(until.elementsLocated(By.xpath(`//*[@id='notice_title_${last_Notice_Id.last_Notice_Id}']`)),4000)                 
-	const recentDataObj = await driver.findElement(By.xpath("//*[@id='notice_title_23619']"))	
-		console.log(recentDataObj) ;
+	/*
+	 * get first element of li 
+	 * */
+//		for(let i = 0 ; i )
+	const recentDataObj = await driver.findElements(By.xpath("//div[@class=' relevant-content']/ul/li/div/div"))	
+	console.log(recentDataObj) ;	
+	var  pList = [] ;
+	for(var i = 0 ; i < recentDataObj.length ; i++) {
+		if(doasync(recentDataObj[i].getAttribute('id')).length != 0 || strin instanceof String ){
+			pList.push(doasync(recentDataObj[i].getAttribute('id')))
+		}
+	}
+	Promise.all(pList).then(res => {
+		console.log(res);
+		return res ;
+	}).then((res) => {
+		for(let i = 1 ; i < res.length; i++ ){ 
+			if(res[i] == last_Notice_Id.last_Notice_Id){
+				if(i > 1 ){
+					console.log("thereis an update")
+					return val ;
+				}
+			}
+		}
+
+		console.log("NO update"); 
+		return val ;
+	}).then((al) =>{
+		console.log("sdf", al )
+	}) 
 	}catch(err) {
 		console.log(err)
 		await driver.quit() ;
 	}
 })();
+
+function doasync (a) {
+	return new Promise((resolve , reject )=>  {
+		setTimeout(()=>{
+			if(a instanceof String || a.length != 0){
+				resolve(a);
+			}
+		}, 500)
+	})
+}
 
 module.exports = app;
