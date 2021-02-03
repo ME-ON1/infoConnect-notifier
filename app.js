@@ -38,7 +38,7 @@ const documentInitili = (driver) => {
 //		for(let i = 0 ; i )
 	const recentDataObj = await driver.findElements(By.xpath("//div[@class=' relevant-content']/ul/li/div/div"))	
 	console.log(recentDataObj) ;	
-	var  pList = [] ;
+	var  pList = [] , updateList = new Array() ;
 	for(var i = 0 ; i < recentDataObj.length ; i++) {
 		if(doasync(recentDataObj[i].getAttribute('id')).length != 0 || strin instanceof String ){
 			pList.push(doasync(recentDataObj[i].getAttribute('id')))
@@ -46,22 +46,34 @@ const documentInitili = (driver) => {
 	}
 	Promise.all(pList).then(res => {
 		console.log(res);
+
 		return res ;
 	}).then((res) => {
 		for(let i = 1 ; i < res.length; i++ ){ 
 			if(res[i] == last_Notice_Id.last_Notice_Id){
 				if(i > 1 ){
 					console.log("thereis an update")
-					return val ;
+					return {index : i - 1, res}  ;
 				}
 			}
 		}
 
-		console.log("NO update"); 
-		return val ;
-	}).then((al) =>{
-		console.log("sdf", al )
-	}) 
+		return {index : -1 , res } ; 
+	}).then(({index, res} ) =>{
+		if(index < 0) {
+			throw "no Update"; 
+		}
+		for(let i = index ; i > 0 ; i-- ){
+			updateList.push(res[i]) ;
+		}
+		return updateList ;
+	}).then((updateList)=>{
+		console.log(updateList[updateList.length - 1 ])
+		let data = JSON.stringify(updateList[updateList.length - 1])
+		console.log(data ,"json")
+	}).then(() => {
+		
+	})
 	}catch(err) {
 		console.log(err)
 		await driver.quit() ;
