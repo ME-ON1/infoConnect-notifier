@@ -72,12 +72,18 @@ async function selen (){
 			for(let i = index ; i > 0 ; i-- ){
 				updateList.push(res[i]) ;
 			}
-			return updateList ;
+			console.log(updateList)
+			return returnThenValue(updateList) ;
 		})
 	}catch(err) {
 		console.log(err)
 		await driver.quit() ;
 	}
+}
+
+function returnThenValue(updateListArray) {
+	 console.log(updateListArray, "return; ")
+	 return updateListArray ;
 }
 
 function doasync (a) {
@@ -90,8 +96,9 @@ function doasync (a) {
 	})
 }
 
+
 app.get("/main", async (req,res,next )=> {
-	const updateId = await selen()
+	const updateList =  await selen() ;
 })
 
 app.listen(3005, ()=>{
