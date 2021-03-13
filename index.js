@@ -28,7 +28,7 @@ mongoose.connect(process.env.MONGO_URL, {
 	}
 })
 
-app.use(userRoute)
+app.use("/user",userRoute)
 
 app.listen(3005, ()=>{
 	console.log("server is running!! ")
