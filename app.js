@@ -1,21 +1,6 @@
-require("dotenv").config()
-
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bp = require("body-parser")
 const fs =require("fs");
 
 const last_Notice_Id = require("./lastData.json") ;
-const app = express()
-// view engine setup
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
 
 const {Builder,By, Key,until } = require("selenium-webdriver") ;
 const documentInitili = (driver) => {
@@ -95,13 +80,3 @@ function doasync (a) {
 		}, 500)
 	})
 }
-
-
-app.get("/main", async (req,res,next )=> {
-	const updateList =  await selen() ;
-})
-
-app.listen(3005, ()=>{
-	console.log("server is running" )
-})
-module.exports = app;
