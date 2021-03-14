@@ -15,11 +15,12 @@ exports.userSubscribe = async (req,res,next)=> {
 			return res.status(401).json("Already a user !! ")
 		}
 
-		const newuser = SubsModel.create(userData) ;
+		const newuser = await SubsModel.create(userData) ;
 		return res.status(200).json({status : "OK" , newuser })
 
 
 	}catch(err) {
-		throw err
+		throw next(err)
 	}
 }
+

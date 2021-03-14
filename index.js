@@ -29,7 +29,15 @@ mongoose.connect(process.env.MONGO_URL, {
 })
 
 app.use("/user",userRoute)
+app.get("/", (req,res,next)=>{
+	res.status(200).json({msg : "this is good !!"})
+})
 
+app.use((err,req,res, next) => {
+	if(err) {
+		res.status(500).json( {statu : "bad" , msg: "Internal Server Error, Check Logs!"} )
+	}
+})
 app.listen(3005, ()=>{
 	console.log("server is running!! ")
 })
