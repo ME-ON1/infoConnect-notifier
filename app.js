@@ -47,6 +47,7 @@ async function selen (){
 //		for(let i = 0 ; i )
 	const recentDataObj = await driver.findElements(By.xpath("//div[@class=' relevant-content']/ul/li/div/div"))
 	console.log(recentDataObj) ;
+>>>>>>> parent of e412444 (added update array function)
 	var  pList = [] ;
 	for(var i = 0 ; i < recentDataObj.length ; i++) {
 		if(doasync(recentDataObj[i].getAttribute('id')).length != 0 || strin instanceof String ){
