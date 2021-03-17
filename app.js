@@ -35,6 +35,34 @@ async function selen (){
 		for(var i = 0 ; i < recentDataObj.length ; i++) {
 			if(doasync(recentDataObj[i].getAttribute('id')).length != 0 ){
 				pList.push(doasync(recentDataObj[i].getAttribute('id')))
+	await driver.get("http://210.212.85.155:8082/notices/")
+	await driver.wait(until.elementsLocated(By.name('login')),2000)
+	await driver.findElement(By.name("login")).sendKeys(process.env.USER_ID, Key.TAB) ;
+        await driver.findElement(By.name("password")).sendKeys(process.env.PASSWORD, Key.ENTER)
+		//    //*[@id="notice_title_23619"]
+        await driver.wait(until.elementsLocated(By.xpath(`//*[@id='notice_title_${last_Notice_Id.last_Notice_Id}']`)),4000)
+	/*
+	 * get first element of li
+	 * */
+//		for(let i = 0 ; i )
+	const recentDataObj = await driver.findElements(By.xpath("//div[@class=' relevant-content']/ul/li/div/div"))
+	console.log(recentDataObj) ;
+	var  pList = [] ;
+	for(var i = 0 ; i < recentDataObj.length ; i++) {
+		if(doasync(recentDataObj[i].getAttribute('id')).length != 0 || strin instanceof String ){
+			pList.push(doasync(recentDataObj[i].getAttribute('id')))
+		}
+	}
+	Promise.all(pList).then(res => {
+		console.log(res);
+		return res ;
+	}).then((res) => {
+		for(let i = 1 ; i < res.length; i++ ){
+			if(res[i] == last_Notice_Id.last_Notice_Id){
+				if(i > 1 ){
+					console.log("thereis an update")
+					return val ;
+				}
 			}
 		}
 		Promise.all(pList).then(res => {
@@ -60,6 +88,11 @@ async function selen (){
 			console.log(updateList)
 			return returnThenValue(updateList) ;
 		})
+		console.log("NO update");
+		return val ;
+	}).then((al) =>{
+		console.log("sdf", al )
+	})
 	}catch(err) {
 		console.log(err)
 		await driver.quit() ;
