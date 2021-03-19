@@ -1,5 +1,4 @@
 const SubsModel = require("../model/subscriber")
-const sendEmail = require("../helper/mail")
 
 exports.userSubscribe = async (req,res,next)=> {
 	const {email , name , batch } = req.body
