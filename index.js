@@ -17,21 +17,21 @@ app.use(express.urlencoded({ extended: false }));
 
 const userRoute = require("./routes/users")
 
-mongoose.connect(process.env.MONGO_URL, {
-	useNewUrlParser : true ,
-	useUnifiedTopology : true
-}, (err,res)=>{
-	if(err) {
-		console.log("problem with db ", err)
-	}else {
-		console.log("db connected let's rocKK ");
-	}
-})
+//mongoose.connect(process.env.MONGO_URL, {
+	//useNewUrlParser : true ,
+	//useUnifiedTopology : true
+//}, (err,res)=>{
+	//if(err) {
+		//console.log("problem with db ", err)
+	//}else {
+		//console.log("db connected let's rocKK ");
+	//}
+//})
 
 app.use("/user",userRoute)
 app.get("/", (req,res,next)=>{
 	res.status(200).json({msg : "this is good !!"})
-})
+)
 
 app.use((err,req,res, next) => {
 	if(err) {
